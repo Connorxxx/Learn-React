@@ -10,7 +10,8 @@ import {useEffect} from "react";
 export const useMainViewModel = (): HomeIntent => {
     const homeState: MainState = {
         checkId: 0,
-        search: ""
+        search: "",
+        openModal: false
     }
     const [state, setState] = useImmer(homeState)
     const navigate = useNavigate()
@@ -20,15 +21,26 @@ export const useMainViewModel = (): HomeIntent => {
     return {
         ...state,
         onClickUser(btn: SideButton): void {
+            if (btn.id != 3) {
+                setState(draft => {
+                    draft.checkId = btn.id
+                })
+                navigate(btn.router)
+            }
+            else {
+                setState(draft => {draft.openModal = true})
+            }
+        },
+        onClose() {
             setState(draft => {
-                draft.checkId = btn.id
+                draft.openModal = false
             })
-            navigate(btn.router)
+        },
+        onLogout() {
+            navigate("/login")
         }
     }
 }
-
-
 
 export const btnList: SideButton[] = [
     {id: 0, name: "Home", uncheckIcon: HomeOutlinedIcon, checkIcon: Home, router: `/contacts/0`},
@@ -50,5 +62,25 @@ export const uiValue: { [key in HomeValue]: SxProps } = {
         borderRadius: "4rem",
         marginTop: "1.5rem",
         color: "black",
+    },
+    logout: {
+        marginTop: "2rem",
+        borderRadius: "4rem",
+        backgroundColor: "black",
+        width: "95%",
+        '&:hover': {
+            backgroundColor: "#1c1c1c",
+        }
+    },
+    cancel: {
+        marginTop: "1rem",
+        borderRadius: "4rem",
+        width: "95%",
+        color: 'black',
+        backgroundColor: "white",
+        borderColor: "black",
+        '&:hover': {
+            backgroundColor: "#f8f8f8",
+        }
     }
 }

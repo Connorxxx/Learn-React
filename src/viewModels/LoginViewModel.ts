@@ -74,7 +74,7 @@ export const uiValue: { [key in LoginValue]: SxProps } = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: '3rem'
+        paddingBottom: '3rem',
     },
     login: {
         borderRadius: "4rem",
