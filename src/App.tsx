@@ -3,6 +3,7 @@ import {LoginScreen} from "./routes/LoginScreen.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {MainScreen} from "./routes/MainScreen.tsx";
 import {Contact} from "./routes/Contact.tsx";
+import {HomeScreen} from "./routes/HomeScreen.tsx";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "contacts/:contactId",
                 element: <Contact />,
+            },
+            {
+                path: "home",
+                element: <HomeScreen />,
             }
         ],
     }

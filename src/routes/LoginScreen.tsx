@@ -1,4 +1,4 @@
-import {uiValue, useLoginViewModel} from "../viewModels/LoginViewModel.ts";
+import {uiValue, useLoginViewModel} from "../viewmodels/LoginViewModel.ts";
 import {Alert, Box, Button, Card, Checkbox, FormLabel, Input, Link, Stack, Typography} from "@mui/joy";
 import {Error, Visibility, VisibilityOff} from "@mui/icons-material";
 import React from "react";

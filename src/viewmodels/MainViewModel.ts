@@ -1,5 +1,5 @@
 import {SxProps} from "@mui/joy/styles/types";
-import {HomeIntent, HomeValue, MainState, SideButton} from "../models/ui/MainUiModel.ts";
+import {HomeIntent, HomeValue, MainState, SideButton} from "../models/intent/MainIntent.ts";
 import {useImmer} from "use-immer";
 import {useNavigate} from "react-router-dom";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -8,27 +8,28 @@ import MailIcon from '@mui/icons-material/Mail';
 import {useEffect} from "react";
 
 export const useMainViewModel = (): HomeIntent => {
-    const homeState: MainState = {
+    const mainState: MainState = {
         checkId: 0,
         search: "",
         openModal: false
     }
-    const [state, setState] = useImmer(homeState)
+    const [state, setState] = useImmer(mainState)
     const navigate = useNavigate()
     useEffect(() => {
-        navigate("/contacts/0")
+        navigate("/home")
     }, [navigate])
     return {
         ...state,
-        onClickUser(btn: SideButton): void {
+        onClickUser(btn: SideButton) {
             if (btn.id != 3) {
                 setState(draft => {
                     draft.checkId = btn.id
                 })
                 navigate(btn.router)
-            }
-            else {
-                setState(draft => {draft.openModal = true})
+            } else {
+                setState(draft => {
+                    draft.openModal = true
+                })
             }
         },
         onClose() {
@@ -43,13 +44,13 @@ export const useMainViewModel = (): HomeIntent => {
 }
 
 export const btnList: SideButton[] = [
-    {id: 0, name: "Home", uncheckIcon: HomeOutlinedIcon, checkIcon: Home, router: `/contacts/0`},
+    {id: 0, name: "Home", uncheckIcon: HomeOutlinedIcon, checkIcon: Home, router: `/home`},
     {id: 1, name: "Search", uncheckIcon: SearchOutlined, checkIcon: SavedSearch, router: `/contacts/1`},
     {id: 2, name: "Messages", uncheckIcon: MailOutline, checkIcon: MailIcon, router: `/contacts/2`},
     {id: 3, name: "Logout", uncheckIcon: LogoutOutlined, checkIcon: Logout, router: `/login`}
 ]
 
-export const uiValue: { [key in HomeValue]: SxProps } = {
+export const uiValue: Record<HomeValue, SxProps> = {
     search: {
         '--Input-focusedInset': 'var',
         '&:focus-within': {

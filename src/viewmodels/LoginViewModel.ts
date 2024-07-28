@@ -1,5 +1,5 @@
 import {useImmer} from "use-immer";
-import {LoginIntent, LoginState, LoginValue} from "../models/ui/LoginUiModel.ts";
+import {LoginIntent, LoginState, LoginValue} from "../models/intent/LoginIntent.ts";
 import {SxProps} from "@mui/joy/styles/types";
 import {css} from "@emotion/react";
 import {useNavigate} from "react-router-dom";

@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Button, Card, Modal, ModalDialog, Stack, Typography} from "@mui/joy";
-import {btnList, uiValue, useMainViewModel} from "../viewModels/MainViewModel.ts";
+import {Button, Card, Modal, Stack, Typography} from "@mui/joy";
+import {btnList, uiValue, useMainViewModel} from "../viewmodels/MainViewModel.ts";
 import {Outlet} from "react-router-dom";
 import {GitHub} from "@mui/icons-material";
-import {SideButton} from "../models/ui/MainUiModel.ts";
+import {SideButton} from "../models/intent/MainIntent.ts";
 
 export const MainScreen = () => {
     const vm = useMainViewModel()
@@ -28,12 +28,17 @@ const SideBar = (props: { content: () => React.ReactNode }) =>
             React</Typography>
     </Stack>
 
-const MainButton = (props: { onClick: (btn: SideButton) => void, checkId: number }) => btnList.map(it => <Button
-    variant="plain"
-    size="lg"
-    startDecorator={props.checkId === it.id ? <it.checkIcon/> : <it.uncheckIcon/>}
-    onClick={() => props.onClick(it)}
-    sx={uiValue.btnHome}>{it.name}</Button>)
+const MainButton = (props: { onClick: (btn: SideButton) => void, checkId: number }) => btnList.map(it =>
+    <Button
+        variant="plain"
+        size="lg"
+        key={it.id}
+        startDecorator={props.checkId === it.id ? <it.checkIcon/> : <it.uncheckIcon/>}
+        onClick={() => props.onClick(it)}
+        sx={uiValue.btnHome}>
+        {it.name}
+    </Button>
+)
 
 const LogoutModal = (props: { open: boolean, onClose: () => void, onLogout: () => void }) =>
     <Modal open={props.open}
